@@ -4,30 +4,43 @@ version = "1.0.0"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "beautifulsoup4>=4.15.0,<5.0.0",
     "ebooklib>=0.20,<0.21",
+    "markdownify>=1.2.3,<2.0.0",
     "mcp[cli]>=2.3.0,<3.0.0",
 ]
+
+[project.scripts]
+ebmcp = "ebmcp.main:main"
+
+[build-system]
+requires = ["uv_build>=0.9,<1.0"]
+build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
     "coverage>=7.16.2,<8.0.0",
     "mypy>=2.4.0,<3.0.0",
     "pytest>=9.1.1,<10.0.0",
+    "pytest-asyncio>=1.4.0,<2.0.0",
     "ruff>=0.16.10,<0.17.0",
 ]
 
 [tool.uv]
 add-bounds = "major"
 
+[tool.uv.build-backend]
+module-root = ""
+
 [tool.mypy]
 python_version = '3.14'
 strict = true
-exclude = ["venv/", ".venv/", "etc/", "build/", "dummy*"]
+exclude = ["venv/", ".venv/", "build/"]
 
 [tool.ruff]
 line-length = 120
-target-version = "py313"
-exclude = [".venv", "__pycache__", "trade_control.py"]
+target-version = "py314"
+exclude = [".venv", "__pycache__"]
 
 [tool.ruff.lint]
 select = ["E", "F", "UP", "B", "SIM", "I"]
@@ -37,9 +50,11 @@ known-first-party = ["ebmcp"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+filterwarnings = ["ignore::bs4.XMLParsedAsHTMLWarning"]
 
 [tool.coverage.run]
 source = ["ebmcp"]
+branch = true
 
 [tool.coverage.report]
 show_missing = true
