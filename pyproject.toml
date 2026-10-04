@@ -1,0 +1,45 @@
+[project]
+name = "ebmcp"
+version = "1.0.0"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "ebooklib>=0.20,<0.21",
+    "mcp[cli]>=2.3.0,<3.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.16.2,<8.0.0",
+    "mypy>=2.4.0,<3.0.0",
+    "pytest>=9.1.1,<10.0.0",
+    "ruff>=0.16.10,<0.17.0",
+]
+
+[tool.uv]
+add-bounds = "major"
+
+[tool.mypy]
+python_version = '3.14'
+strict = true
+exclude = ["venv/", ".venv/", "etc/", "build/", "dummy*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+exclude = [".venv", "__pycache__", "trade_control.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "UP", "B", "SIM", "I"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["ebmcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["ebmcp"]
+
+[tool.coverage.report]
+show_missing = true
