@@ -2,7 +2,7 @@
   "mcpServers": {
     "ebmcp": {
       "command": "uv",
-      "args": ["--directory", "/Users/jack/Repos/ebmcp", "run", "ebmcp"]
+      "args": ["--directory", ".", "run", "ebmcp"]
     }
   }
 }
